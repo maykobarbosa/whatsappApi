@@ -15,7 +15,11 @@ const port = process.env.PORT || 8000;
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
+const io = socketIO(server.on('upgrade', (req, socket, head) => {
+  const timeout = 30000; // 30 segundos
+  socket.setTimeout(timeout);
+  // handle WebSocket upgrade requests with the increased timeout
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({
