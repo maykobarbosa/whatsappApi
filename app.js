@@ -183,7 +183,7 @@ app.post('/send-message', [
       message: errors.mapped()
     });
   }
-
+  console.log(req.body)
   const number = phoneNumberFormatter(req.body.number);
   const message = req.body.message;
 
